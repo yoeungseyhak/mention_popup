@@ -34,6 +34,7 @@ class GnkEditor extends StatefulWidget {
     this.autocorrect = true,
     this.obscureText = false,
     this.padding = const EdgeInsets.all(16.0),
+    this.textAlign = TextAlign.start,
   });
 
   /// Page title.
@@ -48,6 +49,7 @@ class GnkEditor extends StatefulWidget {
   final bool obscureText;
   final bool autocorrect;
   final EdgeInsets padding;
+  final TextAlign textAlign;
 
   final MaxLengthEnforcement? maxLengthEnforcement;
   final ValueChanged<String>? onChanged;
@@ -153,6 +155,7 @@ class _GnkEditorState extends State<GnkEditor>
             minLines: widget.minLines,
             autocorrect: widget.autocorrect,
             obscureText: widget.obscureText,
+            textAlign: widget.textAlign,
             onControllerReady: (value) {
               _textFieldController = value;
               widget.onControllerReady!(value);
