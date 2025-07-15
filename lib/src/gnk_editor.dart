@@ -35,6 +35,10 @@ class GnkEditor extends StatefulWidget {
     this.obscureText = false,
     this.padding = const EdgeInsets.all(16.0),
     this.textAlign = TextAlign.start,
+    this.style,
+    this.cursorColor,
+    this.inputFormatters,
+    this.textCapitalization = TextCapitalization.none,
   });
 
   /// Page title.
@@ -50,6 +54,10 @@ class GnkEditor extends StatefulWidget {
   final bool autocorrect;
   final EdgeInsets padding;
   final TextAlign textAlign;
+  final TextStyle? style;
+  final TextCapitalization textCapitalization;
+  final List<TextInputFormatter>? inputFormatters;
+  final Color? cursorColor;
 
   final MaxLengthEnforcement? maxLengthEnforcement;
   final ValueChanged<String>? onChanged;
@@ -86,8 +94,10 @@ class _GnkEditorState extends State<GnkEditor>
 
     var cursorTextPosition = _textFieldController.selection.base;
     var caretPrototype = Rect.fromLTWH(0.0, 0.0, 0, 0);
-    var caretOffset =
-        painter.getOffsetForCaret(cursorTextPosition, caretPrototype);
+    var caretOffset = painter.getOffsetForCaret(
+      cursorTextPosition,
+      caretPrototype,
+    );
 
     var xCaret = caretOffset.dx;
     var yCaret = caretOffset.dy;
@@ -99,9 +109,10 @@ class _GnkEditorState extends State<GnkEditor>
   Future<void> Function()? _closePopup;
 
   Widget _mentionCell(Mentionable mention, Future<void> Function() closePopup) {
-    var avatar = mention.avatar.isEmpty
-        ? "https://i.ibb.co/MRFwXPc/ic-profile.png"
-        : mention.avatar;
+    var avatar =
+        mention.avatar.isEmpty
+            ? "https://i.ibb.co/MRFwXPc/ic-profile.png"
+            : mention.avatar;
 
     return ListTile(
       dense: true,
@@ -128,19 +139,20 @@ class _GnkEditorState extends State<GnkEditor>
           var bottomCenter = buttonRect.bottomCenter;
           return Offset((buttonRect.width / 2) - 125, bottomCenter.dy);
         },
-        backgroundBuilder: (context, child) => Material(
-          elevation: 8,
-          borderRadius: BorderRadius.circular(10),
-          child: child,
-        ),
+        backgroundBuilder:
+            (context, child) => Material(
+              elevation: 8,
+              borderRadius: BorderRadius.circular(10),
+              child: child,
+            ),
         menuBuilder: (context, closePopup) {
           _closePopup = closePopup;
           return Obx(
             () => MentionPopup(
               closePopup: closePopup,
               list: _mentionList.value,
-              builder: (p0, index, mention) =>
-                  _mentionCell(mention, closePopup),
+              builder:
+                  (p0, index, mention) => _mentionCell(mention, closePopup),
             ),
           );
         },
@@ -156,6 +168,10 @@ class _GnkEditorState extends State<GnkEditor>
             autocorrect: widget.autocorrect,
             obscureText: widget.obscureText,
             textAlign: widget.textAlign,
+            textCapitalization: widget.textCapitalization,
+            inputFormatters: widget.inputFormatters,
+            cursorColor: widget.cursorColor,
+            style: widget.style,
             onControllerReady: (value) {
               _textFieldController = value;
               widget.onControllerReady!(value);
