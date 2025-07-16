@@ -40,6 +40,8 @@ class GnkEditor extends StatefulWidget {
     this.inputFormatters,
     this.textCapitalization = TextCapitalization.none,
     this.mentionStyle,
+    this.alignment = PlaceholderAlignment.bottom,
+    this.baseline,
   });
 
   /// Page title.
@@ -66,6 +68,8 @@ class GnkEditor extends StatefulWidget {
 
   final ValueChanged<MentionTextEditingController>? onControllerReady;
   final void Function(String)? onDetectMention;
+  final PlaceholderAlignment alignment;
+  final TextBaseline? baseline;
 
   @override
   State<GnkEditor> createState() => _GnkEditorState();
@@ -175,6 +179,8 @@ class _GnkEditorState extends State<GnkEditor>
             cursorColor: widget.cursorColor,
             style: widget.style,
             mentionStyle: widget.mentionStyle,
+            alignment: widget.alignment,
+            baseline: widget.baseline,
             onControllerReady: (value) {
               _textFieldController = value;
               widget.onControllerReady!(value);

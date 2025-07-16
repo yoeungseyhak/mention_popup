@@ -93,12 +93,17 @@ class MentionableTextField extends StatefulWidget {
     this.scrollController,
     this.autofillHints,
     this.restorationId,
+    this.alignment = PlaceholderAlignment.bottom,
+    this.baseline,
   })  : assert(
           escapingMentionCharacter.length == 1,
           'escapingMentionCharacter should be a single character.',
         ),
         enableInteractiveSelection =
             enableInteractiveSelection ?? (!readOnly || !obscureText);
+
+  final PlaceholderAlignment alignment;
+  final TextBaseline? baseline;
 
   /// A callback to retrieve the [TextField] controller when
   /// it's ready.
@@ -443,6 +448,8 @@ class _MentionableTextFieldState extends State<MentionableTextField> {
     escapingMentionCharacter: widget.escapingMentionCharacter,
     onMentionablesChanged: widget.onMentionablesChanged,
     mentionStyle: widget.mentionStyle,
+    alignment: ,
+    baseline: ,
   );
 
   @override
