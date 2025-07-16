@@ -17,13 +17,21 @@ class MentionTextEditingController extends TextEditingController {
     this.escapingMentionCharacter = Constants.escapingMentionCharacter,
     this.onTextChange,
     TextStyle? mentionStyle,
+    PlaceholderAlignment alignment = PlaceholderAlignment.bottom,
+    TextBaseline? baseline,
+
   })  : _onMentionablesChanged = onMentionablesChanged,
         _storedMentionables = [],
         _mentionStyle = mentionStyle ??
             const TextStyle(
               color: Color.fromRGBO(22, 74, 159, 1),
               fontWeight: FontWeight.w500,
-            );
+            ),
+            _alignment = alignment,
+            _baseline = baseline;
+
+  final PlaceholderAlignment _alignment;
+  final TextBaseline? _baseline;
 
   /// Character that is excluded from keyboard
   /// to replace the mentions (not visible to users).
@@ -139,6 +147,8 @@ class MentionTextEditingController extends TextEditingController {
           final mention = mentionQueue.removeFirst();
           // Mandatory WidgetSpan so that it takes the appropriate char number.
           return WidgetSpan(
+            alignment: _alignment,
+            baseline: _baseline,
             child: Text(
               mention.mentionLabel,
               style: _mentionStyle,
