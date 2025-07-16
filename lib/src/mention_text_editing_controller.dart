@@ -141,7 +141,7 @@ class MentionTextEditingController extends TextEditingController {
           return WidgetSpan(
             child: Text(
               mention.mentionLabel,
-              style: _mentionStyle.copyWith(fontSize: 16),
+              style: _mentionStyle,
             ),
           );
         }
