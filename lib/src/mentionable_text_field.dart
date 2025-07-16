@@ -448,8 +448,8 @@ class _MentionableTextFieldState extends State<MentionableTextField> {
     escapingMentionCharacter: widget.escapingMentionCharacter,
     onMentionablesChanged: widget.onMentionablesChanged,
     mentionStyle: widget.mentionStyle,
-    alignment: ,
-    baseline: ,
+    alignment: widget.alignment,
+    baseline: widget.baseline,
   );
 
   @override
