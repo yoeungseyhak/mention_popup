@@ -39,6 +39,7 @@ class GnkEditor extends StatefulWidget {
     this.cursorColor,
     this.inputFormatters,
     this.textCapitalization = TextCapitalization.none,
+    this.mentionStyle,
   });
 
   /// Page title.
@@ -58,6 +59,7 @@ class GnkEditor extends StatefulWidget {
   final TextCapitalization textCapitalization;
   final List<TextInputFormatter>? inputFormatters;
   final Color? cursorColor;
+  final TextStyle? mentionStyle;
 
   final MaxLengthEnforcement? maxLengthEnforcement;
   final ValueChanged<String>? onChanged;
@@ -172,6 +174,7 @@ class _GnkEditorState extends State<GnkEditor>
             inputFormatters: widget.inputFormatters,
             cursorColor: widget.cursorColor,
             style: widget.style,
+            mentionStyle: widget.mentionStyle,
             onControllerReady: (value) {
               _textFieldController = value;
               widget.onControllerReady!(value);
