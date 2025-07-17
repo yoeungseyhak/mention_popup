@@ -477,6 +477,7 @@ class _MentionableTextFieldState extends State<MentionableTextField> {
 
   @override
   Widget build(BuildContext context) {
+    _controller.copyWith(widget.mentionStyle);
     return TextField(
       onTap: widget.onTap,
       controller: _controller,

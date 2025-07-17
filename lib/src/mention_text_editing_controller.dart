@@ -195,7 +195,11 @@ class MentionTextEditingController extends TextEditingController {
     );
   }
 
-  copyWith(TextStyle mentionStyle) {
-    _mentionStyle = mentionStyle;
+  copyWith(TextStyle? mentionStyle) {
+    _mentionStyle = mentionStyle ??
+        const TextStyle(
+          color: Color.fromRGBO(22, 74, 159, 1),
+          fontWeight: FontWeight.w500,
+        );
   }
 }
