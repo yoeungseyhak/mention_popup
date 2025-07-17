@@ -19,7 +19,6 @@ class MentionTextEditingController extends TextEditingController {
     TextStyle? mentionStyle,
     PlaceholderAlignment alignment = PlaceholderAlignment.bottom,
     TextBaseline? baseline,
-
   })  : _onMentionablesChanged = onMentionablesChanged,
         _storedMentionables = [],
         _mentionStyle = mentionStyle ??
@@ -27,8 +26,8 @@ class MentionTextEditingController extends TextEditingController {
               color: Color.fromRGBO(22, 74, 159, 1),
               fontWeight: FontWeight.w500,
             ),
-            _alignment = alignment,
-            _baseline = baseline;
+        _alignment = alignment,
+        _baseline = baseline;
 
   final PlaceholderAlignment _alignment;
   final TextBaseline? _baseline;
@@ -38,7 +37,7 @@ class MentionTextEditingController extends TextEditingController {
   final String escapingMentionCharacter;
 
   /// [TextStyle] applied to mentionables in Text Field.
-  final TextStyle _mentionStyle;
+  TextStyle _mentionStyle;
 
   /// List of [Mentionable] present in the [TextField].
   /// Order of elements is the same as in the [TextField].
@@ -194,5 +193,9 @@ class MentionTextEditingController extends TextEditingController {
       escapingMentionCharacter,
       (_) => mentionQueue.removeFirst().buildMention(),
     );
+  }
+
+  copyWith(TextStyle mentionStyle) {
+    _mentionStyle = mentionStyle;
   }
 }
